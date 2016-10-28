@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<title>Московский государственный технический университет им. Н.Э.Баумана, 23-25 марта 2016</title>
+<meta charset="utf-8">
+
+<style>
+img {
+  display: block;
+  margin: 0 auto !important;
+  max-width: 600px !important;
+  max-height: 400px !important;
+}
+
+img + strong {
+  display: block;
+  text-align: center;
+}
+</style>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+// Просто список всех markdown-файлов.
+var include = [
+  '00-info',
+  '10-introduce',
+  '20-arduino',
+  '30-raspberry',
+  '40-webclient',
+  '50-analytics',
+  'appendix'
+];
+
+// Подключить только указанный (иначе все).
+var includeOnly = '';
+
+// Тема. Пока стандартная.
+var theme = '';
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function download(files, done) {
+  var downloaded = 0;
+  var result = [];
+
+  files.forEach(function(file, i) {
+    var req = new XMLHttpRequest();
+    req.overrideMimeType('text/plain');
+
+    req.onload = function() {
+      result[i] = req.responseText;
+
+      if (++downloaded === files.length)
+        done(result.join('\n'));
+    };
+
+    req.open('GET', file + '.md', true);
+    req.send();
+  });
+}
+
+function render(theme, data) {
+  var xmp = document.createElement('xmp');
+  xmp.setAttribute('theme', theme);
+  xmp.style = 'display:none';
+  xmp.appendChild(document.createTextNode(data));
+  document.body.appendChild(xmp);
+
+  var script = document.createElement('script');
+  script.src = 'http://strapdownjs.com/v/0.2/strapdown.js';
+  document.body.appendChild(script);
+}
+
+window.onload = function() {
+  download(includeOnly ? [includeOnly] : include, render.bind(null, theme));
+};
+</script>
+</html>
