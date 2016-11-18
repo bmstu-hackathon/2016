@@ -1,0 +1,73 @@
+@import url(http://fonts.googleapis.com/css?family=Nunito:300);
+a    { text-decoration: none; }
+.inpDiv {
+  padding-left: 45%;
+}
+.butDiv{
+  padding-top: 30px;
+}
+.button {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-align: center;
+  color: #E9967A;
+  font-size: 24px;
+  font-family: "Nunito", sans-serif;
+  font-weight: 300;
+  position: relative;
+  margin: 40%;
+  padding: 20px 40px;
+  width: 220px;
+  height: 30px;
+  background: #E9967A;
+  border: 1px solid black;
+  color: #FFF;
+  overflow: hidden;
+  transition: all 0.5s;
+}
+
+.button:hover,
+.button:active {
+  text-decoration: none;
+  color: #CD5C5C;
+  border-color: black;
+  background: #FFF;
+}
+
+.button span {
+  display: inline-block;
+  position: relative;
+  padding-right: 0;
+  transition: padding-right 0.5s;
+}
+
+.button span:after {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  right: -18px;
+  opacity: 0;
+  width: 10px;
+  height: 10px;
+  margin-top: -10px;
+  background: rgba(0, 0, 0, 0);
+  border: 3px solid black;
+  border-top: none;
+  border-right: none;
+  transition: opacity 0.5s, top 0.5s, right 0.5s;
+  transform: rotate(-45deg);
+}
+
+.button:hover span,
+.button:active span {
+  padding-right: 30px;
+}
+
+.button:hover span:after,
+.button:active span:after {
+  transition: opacity 0.5s, top 0.5s, right 0.5s;
+  opacity: 1;
+  border-color: black;
+  right: 0;
+  top: 50%;
+}
