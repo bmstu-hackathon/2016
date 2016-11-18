@@ -313,6 +313,7 @@ http://lo-ra.ru/lora/
 
 Dragino Lora/GPS Shield - это плата расширения для модуля LoRa™/GPS , устанавливаемая на Arduino Uno или на её аналог Seeduino. Этот шилд предназначан для тех, кто заинтересован в развитии и использовании LoRa™/GPS технологий.  Конструктивно Lora/GPS Shield состоит из собственно платы расширения и установленными на ней GPS-модуле и Lora BEE:
 
+<img src="assets/lora_bee_shield.jpg" height="190">
 ![alt tag](assets/lora_bee_shield.jpg)
 
 ## Lora BEE
@@ -324,14 +325,12 @@ Lora BEE основан на приемопередатчике [SX1276/SX1278].
 Этот модуль может устанавливаться на посадочное место на плате расширения Lora/GPS Shield.
 Ниже представлено изображение данного модуля:
 
-![alt tag](assets/lora_bee.jpg)
+<img src="assets/lora_bee.jpg" height="190"><img src="assets/lora_bee_2.jpg" height="190">
 
-![alt tag](assets/lora_bee_2.jpg)
 
 
 Распиновка Lora BEE: 
-
-![alt tag](assets/lora_bee_pinout.jpg)
+<img src="assets/lora_bee_pinout.jpg" height="190">
 
 
 Узнать подробнее о модуле можно пройдя по ссылке: http://wiki.dragino.com/index.php?title=Lora_BEE
@@ -340,6 +339,21 @@ Lora BEE основан на приемопередатчике [SX1276/SX1278].
 [LoRa Bee]: <http://wiki.dragino.com/index.php?title=Lora_BEE>
 [SX1276/SX1278]: <http://www.semtech.com/wireless-rf/rf-transceivers/sx1278/>
 
+## Пример LoRa - Arduino
+
+Ниже представлен код программы, обеспечивающий совместную работу платы Arduino и LoRa GPS-Shield. В этом примере GPS-модуль модуль не используется, плата раширения просто обеспечивает удобный монтаж задействованной LoRa BEE на Arduino.
+
+Данный тестовый пример с определенной частотой посылает на хаб (некий центральный узел), который представлен платой Raspberry Pi, состояние подключенной кнопки. При этом осуществляется приём пакетов от RPi, в которых есть информация о том, зажечь ли светодиод или нет.
+
+Кнопку можно можно подключить к любому цифровому пину. Считываение состояния осуществляется командой digitalRead().
+Участникам хакатона будут выданы GROVE-кнопки или GROVE touch-кнопки. Подключаются они одинаково следующим образом:
+VCC - к питанию на плате,
+GND - к земле на плате,
+SIG - к пину, с которого будет считываться состояние кнопки.
+
+Примерно это выглядит так:
+
+Для индикации используется L-светодиод, распаянный на плате. Он подключен к 13-ому пину. Для изменения его состояния используют функцию digitalWrite(13, LOW) или digitalWrite(13, HIGH).
 
 ```
 #include <SPI.h>
@@ -363,7 +377,7 @@ int dest_addr = DEFAULT_DEST_ADDR;
 char cmd[260] = "0";          // answer to RPi. Represents button state. 0 - free, 1 - reserved
 const int SIGNAL_LED = 13;    // L-led on board
 const int BUTTON_PIN = 2;     // button connected to pin 2
-char sprintf_buf[100];
+char sprintf_buf[100];.
 int msg_sn = 0;
 bool radioON = false;
 uint8_t loraMode = LORAMODE;
