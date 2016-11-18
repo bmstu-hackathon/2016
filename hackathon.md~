@@ -485,6 +485,145 @@ void loop()
 ```
 В данном случае у нас 2 функции с именами setup и loop. Их присутствие обязательно в любой программе на C++ для Arduino.Они могут ничего и не делать, но должны быть написаны. Иначе на стадии компиляции вы получите ошибку.
 
+### Написание программы для отправки данных сенсоров по радиоканалу <a name="24"></a>
+
+В первую очередь задаем в коде константу GROUP_ID с номером вашей группы. Это ваш уникальный идентификатор в радиоканале. Так как все передатчики работают на одной частоте, то в первую очередь необходимо выделять среди прочих данные именно с ваших датчиков. 
+Например, для первой группы это делается следующим образом: 
+
+```
+#define GROUP_ID 1 
+```
+Для работы с радиомодулем нужно подключить библиотеку RCSwitch.
+```
+#include "RCSwitch.h"
+RCSwitch sender = RCSwitch();
+```
+
+В setup() производим включение радиомодуля, подключенного к контакту D2 платы GROVE.
+```
+#define TRANSMITTER_PIN 2
+void setup() {
+  sender.enableTransmit(TRANSMITTER_PIN);
+  sender.setRepeatTransmit(4);
+}
+```
+Для считывания значений аналогового датчика температуры используется стандартная функция analogRead()
+#### Синтаксис <a name="25"></a>
+analogRead(pin)
+#### Параметры <a name="26"></a>
+pin: номер порта аналогового входа с которого будет производиться считывание (0..5 для большинства плат, 0..7 для Mini и Nano и 0..15 для Mega)
+#### Возвращаемое значение <a name="27"></a>
+int (0 to 1023)
+#### Замечание <a name="28"></a>
+Если аналоговый вход не подключен, то значения возвращаемые функцией analogRead() могут принимать случайные значения.
+
+Код для датчика температуры:
+```
+#define TEMPERATURE_SENSOR A1
+
+#define B 3975 // идентификатор используемого термистора
+int getTemperature() {
+  int value = analogRead(TEMPERATURE_SENSOR);
+  float resistance = (float)(1023 - value) * 10000 / value;
+  float temperature = 1 / (log(resistance / 10000) / B + 1/298.15) - 273.15;
+  return temperature;
+}
+```
+
+Код для датчика угла поворота:
+```
+#define ROTARY_ANGLE_SENSOR A0
+
+#define ADC_REF 5 // значение питания платы Arduino 5V
+#define FULL_ANGLE 300 // Максимальное значение угла поворота
+#define GROVE_VCC 5 // значение питания платы GROVE 5V
+
+int getAngle() {
+  int value = analogRead(ROTARY_ANGLE_SENSOR);
+  float voltage = (float)value * ADC_REF / 1023;
+  return voltage * FULL_ANGLE / GROVE_VCC;
+}
+```
+Функция для кодирования сообщения, передаваемого по радиоканалу.
+
+```
+/*
+Формат данных:
+  group - идентификатор вашей группы
+  n - номер датчика
+  data - текущее показание
+*/
+unsigned long encode(byte group, byte n, int data) {
+  return (unsigned long)group << 24 | (unsigned long)n << 16 | data & 0xffff;
+}
+```
+
+Основной цикл программы:
+```
+#define GROUP_ID 1
+void loop() {
+  int temp = getTemperature(); // считывание значения температуры
+  int degree = getAngle();     // считывание значения угла поворота
+  sender.send(encode(GROUP_ID, 0, temp), 32); //кодирование и отправка температуры
+  delay(500); // задержка 500 мс
+  sender.send(encode(GROUP_ID, 1, degree), 32); //кодирование и отправка угла поворота
+  delay(500); 
+}
+```
+
+Полный код тестовой программы для Arduino:
+```
+#include "RCSwitch.h"
+
+#define GROUP_ID 1 // идентификатор вашей группы
+#define TRANSMITTER_PIN 2 // номер контакта, к которому подключен передатчик (D2)
+#define TEMPERATURE_SENSOR A1 // номер контакта, к которому подключен датчик температуры
+#define ROTARY_ANGLE_SENSOR A0 // номер контакта, к которому подключен датчик угла поворота 
+
+
+RCSwitch sender = RCSwitch();
+
+/*
+Формат данных:
+  group - идентификатор вашей группы
+  n - номер датчика
+  data - текущее показание
+*/
+unsigned long encode(byte group, byte n, int data) {
+  return (unsigned long)group << 24 | (unsigned long)n << 16 | data & 0xffff;
+}
+
+#define B 3975 // идентификатор используемого термистора
+int getTemperature() {
+  int value = analogRead(TEMPERATURE_SENSOR);
+  float resistance = (float)(1023 - value) * 10000 / value;
+  float temperature = 1 / (log(resistance / 10000) / B + 1/298.15) - 273.15;
+  return temperature;
+}
+
+#define ADC_REF 5 // значение питания платы Arduino 5V
+#define FULL_ANGLE 300 // Максимальное значение угла поворота
+#define GROVE_VCC 5 // значение питания платы GROVE 5V
+
+int getAngle() {
+  int value = analogRead(ROTARY_ANGLE_SENSOR);
+  float voltage = (float)value * ADC_REF / 1023;
+  return voltage * FULL_ANGLE / GROVE_VCC;
+}
+
+void setup() {
+  sender.enableTransmit(TRANSMITTER_PIN);
+  sender.setRepeatTransmit(4);
+}
+
+void loop() {
+  int temp = getTemperature(); // считывание значения температуры
+  int degree = getAngle();     // считывание значения угла поворота
+  sender.send(encode(GROUP_ID, 0, temp), 32); //кодирование и отправка температуры
+  delay(500); // задержка 500 мс
+  sender.send(encode(GROUP_ID, 1, degree), 32); //кодирование и отправка угла поворота
+  delay(500); 
+}
 
 ```
 ## Raspberry Pi <a name="29"></a>
