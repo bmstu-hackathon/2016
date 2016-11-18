@@ -11,7 +11,8 @@ https://github.com/oljekechoro/hackathonTizenClient.git
 * Жмите несколько раз *Next* и *Finish*
 * В окне *Project Explorer* раскройте созданный проект и откройте файл index.html	
 Этот файл описывает UI приложения как обычную веб-страницу, соответственно вы ее можете редактировать, раскрывая весь свой талант фронт-эндера. В файле *css/style.css* находятся настройки стилей этой страницы (спасибо, кэп).
-```
+
+```php
 <!DOCTYPE html>
 <html>
 
@@ -43,8 +44,10 @@ https://github.com/oljekechoro/hackathonTizenClient.git
 
 </html>
 ```
+
 В элемент *div* c *id = “field”* (25-строка) будет вставляться весь контент, полученный с Raspberry.
 Логика веб-приложений Tizen программируется на JavaScript, файл с кодом находится по следующему пути:  *js/main.js*. Немного пройдемся по коду.
+
 ```javascript
 var SERVER_URL;
 var DELAY = 2000;
