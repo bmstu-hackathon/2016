@@ -330,6 +330,7 @@ Lora BEE основан на приемопередатчике [SX1276/SX1278].
 
 
 Распиновка Lora BEE: 
+
 <img src="assets/lora_bee_pinout.jpg" height="190">
 
 
