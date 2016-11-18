@@ -295,9 +295,12 @@ void loop() {
 
 ```
 
+
 # Технология LoRa
 
-*Технология LoRa* - объединяет в себе метод модуляции LoRa в беспроводных сетях LPWAN и открытый протокол LoRaWAN.
+
+
+Технология LoRa - объединяет в себе метод модуляции LoRa в беспроводных сетях LPWAN и открытый протокол LoRaWAN.
 Технология LoRa обеспечивает межмашинное взаимодействие (M2M) на расстояния до 15км при минимальном потреблении электроэнергии, обеспечивающем несколько лет автономной работы на одном аккумуляторе АА.
 Диапазон применений данной технологии огромен: от домашней автоматизации и интернета вещей (Internet of Things, IoT) до промышленности и Умных Городов.
 Подробнее о технологии можно прочитать, пройдя по ссылке: 
@@ -307,23 +310,176 @@ http://lo-ra.ru/lora/
 Один комплект состоит из [LoRa GPS-Shield] с установленным на нём модулем [LoRa BEE].
 
 ## Lora GPS-Shield
+
 Dragino Lora/GPS Shield - это плата расширения для модуля LoRa™/GPS , устанавливаемая на Arduino Uno или на её аналог Seeduino. Этот шилд предназначан для тех, кто заинтересован в развитии и использовании LoRa™/GPS технологий.  Конструктивно Lora/GPS Shield состоит из собственно платы расширения и установленными на ней GPS-модуле и Lora BEE:
-<img src="https://pp.vk.me/c638926/v638926974/ea54/05Yo9Jbd6jU.jpg" height="300">
+
+<img src="assets/lora_bee_shield.jpg" height="190">
+![alt tag](assets/lora_bee_shield.jpg)
 
 ## Lora BEE
+
 Dragino Lora BEE - это LoRa-модуль, позволяющий отправлять данные на ультра-дальние расстояния с высокой помехоустойчивостью, обеспечивая при этом минимальное энергопотребление.
 
 Lora BEE основан на приемопередатчике [SX1276/SX1278]. Модуль Lora BEE предназначен для сложных распределенных сетевых систем таких как, умные города, различные сельскохозяйственные ирригационны системы, системы по поиску смартфонов и т.д.
 
 Этот модуль может устанавливаться на посадочное место на плате расширения Lora/GPS Shield.
 Ниже представлено изображение данного модуля:
-<img src="https://pp.vk.me/c638926/v638926974/ea45/131p3-jtN64.jpg" height="190"><img src="https://pp.vk.me/c638926/v638926974/ea3c/DDvjfoAn_qc.jpg" height="190">
+
+<img src="assets/lora_bee.jpg" height="190"><img src="assets/lora_bee_2.jpg" height="190">
+
+
 
 Распиновка Lora BEE: 
-<img src="https://pp.vk.me/c638926/v638926974/ea4d/69BvSQ0ijd4.jpg" height="200">
+
+<img src="assets/lora_bee_pinout.jpg" height="190">
+
 
 Узнать подробнее о модуле можно пройдя по ссылке: http://wiki.dragino.com/index.php?title=Lora_BEE
 
 [LoRa GPS-Shield]:<http://wiki.dragino.com/index.php?title=Lora/GPS_Shield>
 [LoRa Bee]: <http://wiki.dragino.com/index.php?title=Lora_BEE>
 [SX1276/SX1278]: <http://www.semtech.com/wireless-rf/rf-transceivers/sx1278/>
+
+## Пример LoRa - Arduino
+
+Ниже представлен код программы, обеспечивающий совместную работу платы Arduino и LoRa GPS-Shield. В этом примере GPS-модуль модуль не используется, плата раширения просто обеспечивает удобный монтаж задействованной LoRa BEE на Arduino.
+
+Данный тестовый пример с определенной частотой посылает на хаб (некий центральный узел), который представлен платой Raspberry Pi, состояние подключенной кнопки. При этом осуществляется приём пакетов от RPi, в которых есть информация о том, зажечь ли светодиод или нет.
+
+Кнопку можно можно подключить к любому цифровому пину. Считываение состояния осуществляется командой digitalRead().
+Участникам хакатона будут выданы GROVE-кнопки или GROVE touch-кнопки. Подключаются они одинаково следующим образом:
+VCC - к питанию на плате,
+GND - к земле на плате,
+SIG - к пину, с которого будет считываться состояние кнопки.
+
+Примерно это выглядит так:
+
+Для индикации используется L-светодиод, распаянный на плате. Он подключен к 13-ому пину. Для изменения его состояния используют функцию digitalWrite(13, LOW) или digitalWrite(13, HIGH).
+
+```
+#include <SPI.h>
+#include "SX1272.h"
+
+// Define section
+#define BAND868 //900, 433
+#define MAX_NB_CHANNEL 9
+#define STARTING_CHANNEL 10
+#define ENDING_CHANNEL 18
+uint8_t loraChannelIndex = 0;
+uint32_t loraChannelArray[MAX_NB_CHANNEL] = {CH_10_868, CH_11_868, CH_12_868, CH_13_868, CH_14_868, CH_15_868, CH_16_868, CH_17_868, CH_18_868};
+#define LORAMODE  1 //Mode
+#define LORA_ADDR 6 //Self address
+#define DEFAULT_DEST_ADDR 1201 //Gateway address
+
+#define FLUSHOUTPUT               Serial.flush();
+
+//Variables
+int dest_addr = DEFAULT_DEST_ADDR;
+char cmd[260] = "0";          // answer to RPi. Represents button state. 0 - free, 1 - reserved
+const int SIGNAL_LED = 13;    // L-led on board
+const int BUTTON_PIN = 2;     // button connected to pin 2
+char sprintf_buf[100];.
+int msg_sn = 0;
+bool radioON = false;
+uint8_t loraMode = LORAMODE;
+uint32_t loraChannel = loraChannelArray[loraChannelIndex];
+char loraPower = 'x'; //innitial poser level, M (maximum), H (high), L (low)
+uint8_t loraAddr = LORA_ADDR;
+unsigned int inter_pkt_time = 10000; //Time between sending
+unsigned int random_inter_pkt_time = 0;
+long last_periodic_sendtime = 0;
+
+
+// Configure LoRa tranciever
+void startConfig() {
+
+  int e;
+
+  // Set transmission mode and print the result
+  e = sx1272.setMode(loraMode);
+  // Select frequency channel
+  if (loraMode == 11) {
+    e = sx1272.setChannel(CH_18_868);
+  }
+  else {
+    e = sx1272.setChannel(loraChannel);
+  }
+  // Select output power (Max, High or Low)
+  e = sx1272.setPower(loraPower);
+  // get preamble length
+  e = sx1272.getPreambleLength();
+  // Set the node address and print the result
+  sx1272._nodeAddress = loraAddr;
+  e = 0;
+}
+
+void setup() {
+  int e;
+
+  //Add our code here
+  Serial.begin(38400);
+  // Power ON the module
+  e = sx1272.ON();
+
+  e = sx1272.getSyncWord();
+
+  if (!e) {
+    radioON = true;
+    startConfig();
+  }
+
+  FLUSHOUTPUT;
+  delay(1000);
+
+}
+
+void loop() {
+  
+  int e;
+
+  if (radioON) {
+
+    // Arduino periodically sends button state
+    if (inter_pkt_time)
+
+      if (millis() - last_periodic_sendtime > (random_inter_pkt_time ? random_inter_pkt_time : inter_pkt_time)) {
+        sx1272.CarrierSense();
+        long startSend = millis();
+        cmd[0] = digitalRead(BUTTON_PIN) + '0';                                             // write button state
+        e = sx1272.sendPacketTimeout(dest_addr, (uint8_t*) cmd, strlen(cmd), 10000);   // send packet
+        if (random_inter_pkt_time) {
+          random_inter_pkt_time = random(1000, inter_pkt_time);
+        }
+        last_periodic_sendtime = millis();
+      }
+
+    e = 1;
+    // trying to receive packet
+    uint16_t w_timer = 1000;
+    if (loraMode == 1)
+      w_timer = 5000;
+    e = sx1272.receivePacketTimeout(w_timer);
+
+    // if packet was received?
+    if (!e) {
+      int a = 0, b = 0;
+      uint8_t tmp_length;
+
+      sx1272.getSNR();
+      sx1272.getRSSIpacket();
+      tmp_length = sx1272._payloadlength;
+      if (tmp_length) {
+        if ((char) sx1272.packet_received.data[0] == "0") {
+          digitalWrite(SIGNAL_LED, LOW);
+        } else {
+          digitalWrite(SIGNAL_LED, HIGH);
+        }
+      }
+
+    }
+
+  }
+}
+
+
+```
