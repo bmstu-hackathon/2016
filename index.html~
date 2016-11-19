@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>Московский государственный технический университет им. Н.Э.Баумана, 12 ноября - 10 декабря 2016</title>
+<title>Московский государственный технический университет им. Н.Э.Баумана, 19 ноября - 10 декабря 2016</title>
 <meta charset="utf-8">
 
 <style>
@@ -27,7 +27,7 @@ var include = [
   '20-arduino',
   '30-raspberry',
   '40-webclient',
-  '50-analytics',
+  '35-tizen',
   'appendix'
 ];
 
@@ -69,7 +69,7 @@ function render(theme, data) {
   document.body.appendChild(xmp);
 
   var script = document.createElement('script');
-  script.src = 'http://strapdownjs.com/v/0.2/strapdown.js';
+  script.src = 'https://strapdownjs.com/v/0.2/strapdown.js';
   document.body.appendChild(script);
 }
 
