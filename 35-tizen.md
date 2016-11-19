@@ -74,14 +74,11 @@ function setIp(){
 }
 
 function show(data){
-	$("#field").empty();
-	$("#field").append(data);
+	window.location.replace("http://"+SERVER_URL+":5000/");
 }
-
-//Предполагается, что малинка дает html-код(но не код целой странички)
 function getFromPi(){
 	$.ajax({
-		url: "http://"+SERVER_URL+":80/index.php", 
+		url: "http://"+SERVER_URL+":5000/",
 		type: "GET",
 		dataType: "text",
 		success: show,
@@ -92,10 +89,10 @@ function getFromPi(){
 * *DELAY* – период обновления контента, получаемого от Raspberry
 * *SERVER_URL* – адрес сервера, он инициализируется полем *input* с *id = "ip”*. Его можно захардкодить, тогда можно смело избавляться от элемента *input* и функции *setIp()*.
 * Функция *getFromPi()* выполняет AJAX-запрос к Raspberry по адресу
-http:// + SERVER_URL + ":80/index.php"
+http:// + SERVER_URL + ":5000" для проверки связи
 Если у вас другой порт и страница скрипта, поменяйте адрес.
 * *setInterval* на 15-строке устанавливает таймер, который по истечению *DELAY* будет вызывать функцию *getFromPi()*.
-* Функция *show()* подставляет полученные данные в *div* с id = “field”, предварительно удалив все его содержимое. Предполагается, что Pi будет посылать html-код.
+* Функция *show()* перенаправляет на страницу "http://" + SERVER_URL + ":5000" 
 
 # Как узнать адрес Raspberry?
 
