@@ -87,7 +87,9 @@ void loop() {
         sx1272.CarrierSense();
         long startSend = millis();
         cmd[0] = digitalRead(BUTTON_PIN) + '0';                                             // write button state
-        e = sx1272.sendPacketTimeout(dest_addr, (uint8_t*) cmd, strlen(cmd), 10000);   // send packet
+        int id_place = 1; //id парковочного места и собственно ардуино
+        char* str = "\$011";
+        e = sx1272.sendPacketTimeout(dest_addr, (uint8_t*) str, strlen(str), 10000);   // send packet
         if (random_inter_pkt_time) {
           random_inter_pkt_time = random(1000, inter_pkt_time);
         }
