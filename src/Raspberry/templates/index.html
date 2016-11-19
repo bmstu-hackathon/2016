@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Car parking</title>
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="offset-md-3 col-md-6 offset-sm-3 col-sm-6 offset-xs-3 col-xs-6 offset-lg-3 col-lg-6 car-table">
+        <div class="row">
+        {% for place in places %}
+          {% if place.identifier % 4 == 0 and place.identifier != 16 %}
+              {% if place.status == 1 %}
+                <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3 car-cell" data="{{place.identifier}}"> <div class="car-cell_inner  car-cell_inner__free"></div> </div> </div> <div class="row">
+              {% else %}
+                <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3 car-cell" data="{{place.identifier}}"> <div class="car-cell_inner car-cell_inner__reserved"></div> </div> </div> <div class="row">
+              {% endif %}
+          {% else %}
+              {% if place.status == 1 %}
+                <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3 car-cell" data="{{place.identifier}}"> <div class="car-cell_inner car-cell_inner__free"></div> </div>
+              {% else %}
+                <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3 car-cell" data="{{place.identifier}}"> <div class="car-cell_inner car-cell_inner__reserved"></div> </div>
+              {% endif %}
+          {% endif %}
+        {% endfor %}
+        </div>
+    </div>
+  </div>
+</body>
+    <style media="screen">
+      .car-table {
+        padding-top: 2%;
+      }
+      .car-cell {
+        padding: 1%;
+        min-width: 10%;
+        min-height: 10%;
+        line-height: 10em;
+      }
+      .car-cell_inner {
+        padding-top: 100%;
+        min-width: 100%;
+        min-height: 100%;
+        box-shadow: 0 0 10px black;
+        line-height: 10em;
+        border: solid 2px $white;
+        border-radius: 4%;
+      }
+
+      .car-cell_inner:hover {
+        animation: shake 1.20s cubic-bezier(.36,.07,.19,.97) both;
+        transform: translate3d(0, 0, 0);
+        backface-visibility: hidden;
+        perspective: 1000px;
+      }
+
+      .car-cell_inner__free {
+        background-color: black;
+      }
+
+      .car-cell_inner__reserved {
+        background-color: white;
+      }
+
+      @keyframes shake {
+        10%, 90% {
+          transform: translate3d(-1px, 0 , 0);
+        }
+
+        20%, 80% {
+          transform: translate3d(2px, 0, 0);
+        }
+
+        30%, 50%, 70% {
+          transform: translate3d(-4px, 0, 0);
+        }
+
+        40%, 60% {
+          transform: translate3d(4px, 0, 0);
+        }
+      }
+
+    </style>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css">
+</html>
