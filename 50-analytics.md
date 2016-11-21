@@ -14,11 +14,11 @@
 
 [Краткая справка по командам языка R](https://cran.r-project.org/doc/contrib/Short-refcard.pdf)
 
-[Описание IDE RStudio](https://r-analytics.blogspot.ru/p/rstudio.html#.VuiE7x_fVNA)
+[Описание IDE RStudio](http://r-analytics.blogspot.ru/p/rstudio.html#.VuiE7x_fVNA)
 
 [Инструкции определения данных на языке DDL](https://msdn.microsoft.com/ru-ru/library/cc879262%28v=sql.120%29.aspx)
 
-[Краткий справочник по командам SQL](https://4its.ru/html/sql-commands.html)
+[Краткий справочник по командам SQL](http://4its.ru/html/sql-commands.html)
 
 
 ### Работа с сервисом dashDB <a name="41"></a>
@@ -127,7 +127,7 @@ DELETE FROM TEMP WHERE TIME <= (SELECT MAX(TIME) FROM TEMP) - 3600000;
 ![](assets/analytics09.png)
 **Окно среды RStudio.**
 
-Подробнее о работе с IDE RStudio можно узнать [тут](https://r-analytics.blogspot.ru/p/rstudio.html#.VuiE7x_fVNA)
+Подробнее о работе с IDE RStudio можно узнать [тут](http://r-analytics.blogspot.ru/p/rstudio.html#.VuiE7x_fVNA)
 
 Выполним следующий скрипт (скрипт может быть вставлен в окно Console):
 

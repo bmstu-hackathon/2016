@@ -15,7 +15,7 @@ Most of the time you will be interacting with Arduino with a client library on t
 
 * processing
   * [https://github.com/firmata/processing]
-  * [https://funnel.cc]
+  * [http://funnel.cc]
 * python
   * [https://github.com/MrYsLab/pymata-aio]
   * [https://github.com/MrYsLab/PyMata]
@@ -28,35 +28,35 @@ Most of the time you will be interacting with Arduino with a client library on t
 * ruby
   * [https://github.com/hardbap/firmata]
   * [https://github.com/PlasticLizard/rufinol]
-  * [https://funnel.cc]
+  * [http://funnel.cc]
 * clojure
   * [https://github.com/nakkaya/clodiuno]
   * [https://github.com/peterschwarz/clj-firmata]
 * javascript
   * [https://github.com/jgautier/firmata]
   * [https://github.com/rwldrn/johnny-five]
-  * [https://breakoutjs.com]
+  * [http://breakoutjs.com]
 * java
   * [https://github.com/kurbatov/firmata4j]
   * [https://github.com/4ntoine/Firmata]
   * [https://github.com/reapzor/FiloFirmata]
 * .NET
   * [https://github.com/SolidSoils/Arduino]
-  * [https://www.imagitronics.org/projects/firmatanet/]
+  * [http://www.imagitronics.org/projects/firmatanet/]
 * Flash/AS3
-  * [https://funnel.cc]
-  * [https://code.google.com/p/as3glue/]
+  * [http://funnel.cc]
+  * [http://code.google.com/p/as3glue/]
 * PHP
   * [https://github.com/ThomasWeinert/carica-firmata]
   * [https://github.com/oasynnoum/phpmake_firmata]
 * Haskell
-  * [https://hackage.haskell.org/package/hArduino]
+  * [http://hackage.haskell.org/package/hArduino]
 * iOS
   * [https://github.com/jacobrosenthal/iosfirmata]
 * Dart
   * [https://github.com/nfrancois/firmata]
 * Max/MSP
-  * [https://www.maxuino.org/]
+  * [http://www.maxuino.org/]
 * Elixir
   * [https://github.com/kfatehi/firmata]
 * Modelica
@@ -66,7 +66,7 @@ Most of the time you will be interacting with Arduino with a client library on t
 * vvvv
   * [https://vvvv.org/blog/arduino-second-service]
 * openFrameworks
-  * [https://openframeworks.cc/documentation/communication/ofArduino/]
+  * [http://openframeworks.cc/documentation/communication/ofArduino/]
 * Rust
   * [https://github.com/zankich/rust-firmata]
 
@@ -166,7 +166,7 @@ If you would like to contribute but don't have a specific bugfix or new feature 
 
 You must thoroughly test your contributed code. In your pull request, describe tests performed to ensure that no existing code is broken and that any changes maintain backwards compatibility with the existing api. Test on multiple Arduino board variants if possible. We hope to enable some form of automated (or at least semi-automated) testing in the future, but for now any tests will need to be executed manually by the contributor and reviewers.
 
-Use [Artistic Style](https://astyle.sourceforge.net/) (astyle) to format your code. Set the following rules for the astyle formatter:
+Use [Artistic Style](http://astyle.sourceforge.net/) (astyle) to format your code. Set the following rules for the astyle formatter:
 
 ```
 style = ""
