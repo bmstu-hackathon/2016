@@ -68,15 +68,13 @@ function render(theme, data) {
   xmp.style = 'display:none';
   xmp.appendChild(document.createTextNode(data));
   document.body.appendChild(xmp);
+  
+  var script = document.createElement('script');
+  script.src = "strapdown.js";
+  document.body.appendChild(script);
 }
 window.onload = function() {
   download(includeOnly ? [includeOnly] : include, render.bind(null, theme));
 };
-
-document.addEventListener("ready", function(){
-  var script = document.createElement('script');
-  script.src = "strapdown.js";
-  document.body.appendChild(script);
-});
 </script>
 </html>
