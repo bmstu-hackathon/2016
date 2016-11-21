@@ -77,11 +77,11 @@ function setIp(){
 }
 
 function show(data){
-	window.location.replace("http://"+SERVER_URL+":5000/");
+	window.location.replace("https://"+SERVER_URL+":5000/");
 }
 function getFromPi(){
 	$.ajax({
-		url: "http://"+SERVER_URL+":5000/",
+		url: "https://"+SERVER_URL+":5000/",
 		type: "GET",
 		dataType: "text",
 		success: show,
@@ -92,10 +92,10 @@ function getFromPi(){
 * *DELAY* – период обновления контента, получаемого от Raspberry
 * *SERVER_URL* – адрес сервера, он инициализируется полем *input* с *id = "ip”*. Его можно захардкодить, тогда можно смело избавляться от элемента *input* и функции *setIp()*.
 * Функция *getFromPi()* выполняет AJAX-запрос к Raspberry по адресу
-http:// + SERVER_URL + ":5000" для проверки связи
+https:// + SERVER_URL + ":5000" для проверки связи
 Если у вас другой порт и страница скрипта, поменяйте адрес.
 * *setInterval* на 15-строке устанавливает таймер, который по истечению *DELAY* будет вызывать функцию *getFromPi()*.
-* Функция *show()* перенаправляет на страницу "http://" + SERVER_URL + ":5000" 
+* Функция *show()* перенаправляет на страницу "https://" + SERVER_URL + ":5000" 
 
 # Как узнать адрес Raspberry?
 
@@ -134,7 +134,7 @@ host10
 * Подключите его к USB порту компьютера через microUSB разъем Artik’а (USB debug на рисунке). 
 * Запустите Putty (в Ubuntu с помощью sudo), выберите тип подключения Serial, укажите скорость 115200 и выберите порт, к которому подключен Artik (в Ubuntu обычно */dev/ttyUSB0*) и откройте соединение. 
 Если Putty на компьютере не оказалось, скачайте его в магазине приложений или по следующему адресу:
-http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html
+https://www.chiark.greenend.org.uk/~sgtatham/putty/download.html
 * На плате нажмите на Power button и затем в терминале отобразится процесс загрузки ОС. 
 * Войдите в систему под **root** c паролем **tizen**.
 * Выполните команду *systemctl start sdbd_tcp*.

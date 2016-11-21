@@ -147,7 +147,7 @@ void loop()
 Технология LoRa обеспечивает межмашинное взаимодействие (M2M) на расстояния до 15км при минимальном потреблении электроэнергии, обеспечивающем несколько лет автономной работы на одном аккумуляторе АА.
 Диапазон применений данной технологии огромен: от домашней автоматизации и интернета вещей (Internet of Things, IoT) до промышленности и Умных Городов.
 Подробнее о технологии можно прочитать, пройдя по ссылке: 
-http://lo-ra.ru/lora/
+https://lo-ra.ru/lora/
 
 Участникам хакатона будут выданы по два комплекта приемопередатчиков LoRa.
 Один комплект состоит из [LoRa GPS-Shield] с установленным на нём модулем [LoRa BEE].
@@ -177,11 +177,11 @@ Lora BEE основан на приемопередатчике [SX1276/SX1278].
 <img src="assets/lora_bee_pinout.jpg" height="190">
 
 
-Узнать подробнее о модуле можно пройдя по ссылке: http://wiki.dragino.com/index.php?title=Lora_BEE
+Узнать подробнее о модуле можно пройдя по ссылке: https://wiki.dragino.com/index.php?title=Lora_BEE
 
-[LoRa GPS-Shield]:<http://wiki.dragino.com/index.php?title=Lora/GPS_Shield>
-[LoRa Bee]: <http://wiki.dragino.com/index.php?title=Lora_BEE>
-[SX1276/SX1278]: <http://www.semtech.com/wireless-rf/rf-transceivers/sx1278/>
+[LoRa GPS-Shield]:<https://wiki.dragino.com/index.php?title=Lora/GPS_Shield>
+[LoRa Bee]: <https://wiki.dragino.com/index.php?title=Lora_BEE>
+[SX1276/SX1278]: <https://www.semtech.com/wireless-rf/rf-transceivers/sx1278/>
 
 ## Пример LoRa - Arduino
 
