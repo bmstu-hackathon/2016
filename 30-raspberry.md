@@ -368,4 +368,4 @@ $ touch __init__.py
 $ python server.py
 ```
 
-Полный код доступен [здесь](src/Raspberry/).
+Полный код доступен [здесь](https://github.com/bmstu-hackathon/2016/tree/master/src/Raspberry).
