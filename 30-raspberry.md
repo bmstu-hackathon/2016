@@ -74,7 +74,7 @@ ssh pi@XX.XX.XX.XX
 Пароль пользователя pi: raspberry
 
 ***
-# Как узнать адрес Raspberry?
+### Как узнать адрес Raspberry?
 
 * В Ubuntu выполните команду *sudo nmap –sn < ip-адрес компьютера >/< маска >*.  Пример:
  *sudo nmap -sn 192.168.1.0/24*
@@ -368,4 +368,4 @@ $ touch __init__.py
 $ python server.py
 ```
 
-Полный код доступен [здесь](src/Raspberry/).
+Полный код доступен [здесь](https://github.com/bmstu-hackathon/2016/tree/master/src/Raspberry).

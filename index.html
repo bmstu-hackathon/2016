@@ -1,7 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
+
 <title>Московский государственный технический университет им. Н.Э.Баумана, 19 ноября - 10 декабря 2016</title>
 <meta charset="utf-8">
+  <head>
+    <meta charset="UTF-8">
+    <title>2016 by bmstu-hackathon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
 
 <style>
 img {
@@ -10,15 +20,12 @@ img {
   max-width: 600px !important;
   max-height: 400px !important;
 }
-
 img + strong {
   display: block;
   text-align: center;
 }
 </style>
-
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+  
 <script>
 // Просто список всех markdown-файлов.
 var include = [
@@ -31,10 +38,8 @@ var include = [
   '35-tizen',
   'appendix'
 ];
-
 // Подключить только указанный (иначе все).
 var includeOnly = '';
-
 // Тема. Пока стандартная.
 var theme = '';
 </script>
@@ -45,35 +50,29 @@ var theme = '';
 function download(files, done) {
   var downloaded = 0;
   var result = [];
-
   files.forEach(function(file, i) {
     var req = new XMLHttpRequest();
     req.overrideMimeType('text/plain');
-
     req.onload = function() {
       result[i] = req.responseText;
-
       if (++downloaded === files.length)
         done(result.join('\n'));
     };
-
     req.open('GET', file + '.md', true);
     req.send();
   });
 }
-
 function render(theme, data) {
   var xmp = document.createElement('xmp');
   xmp.setAttribute('theme', theme);
   xmp.style = 'display:none';
   xmp.appendChild(document.createTextNode(data));
   document.body.appendChild(xmp);
-
+  
   var script = document.createElement('script');
-  script.src = 'http://strapdownjs.com/v/0.2/strapdown.js';
+  script.src = "strapdown.js";
   document.body.appendChild(script);
 }
-
 window.onload = function() {
   download(includeOnly ? [includeOnly] : include, render.bind(null, theme));
 };

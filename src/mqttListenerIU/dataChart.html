@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="styles/button.css">
+	<title>Document</title>
+</head>
+<body>
+    
+    <div>
+        <canvas id="myChart" width="400" height="400"></canvas>
+         
+
+  </div>
+  <div class = "inpDiv">
+       <input id="commandInput" type="text" class="style-1">
+  </div>
+<div class = "butDiv">
+          <a id="comBut" href="#" class="button">
+              <span>Send command</span>
+          </a>
+</div>
+
+
+      
+  
+
+
+</body>
+<script src="https://code.jquery.com/jquery-3.1.1.js"
+integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.js"></script>
+<script >
+    $(document).ready(function(){
+
+        var ctx = document.getElementById("myChart");
+
+        Chart.defaults.global.maintainAspectRatio = false;
+        Chart.defaults.global.elements.line.fill = false;
+
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [0,1,2,3,4,5,6,7,8,9],
+                datasets: [{
+                    label: 'Temperature sensor',
+                    data: {{chartData}},
+                    borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235,1)',
+                    'rgba(255, 206, 86,1)',
+                    'rgba(75, 192, 192,1)',
+                    'rgba(153, 102, 255,1)',
+                    'rgba(255, 159, 64,1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
+
+        function getData(){        
+            $.ajax({
+                type: "GET",
+                url: "http://" + location.host + "/updateChart",
+                dataType: "json",
+                success: function(res) {
+                    myChart.data.datasets[0].data = res.chartData;
+                    myChart.update();
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        setInterval(getData,2000);
+
+    });
+</script>
+
+<script src="scripts/script.js"></script>
+</html>
