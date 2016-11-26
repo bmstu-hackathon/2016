@@ -1,5 +1,5 @@
 var mongoose    = require('mongoose'),
-	Schema = mongoose.Schema,		
+	Schema = mongoose.Schema,	
 	conf = require('../config.json'),
 	autoIncrement = require('mongoose-auto-increment');
 
@@ -17,13 +17,13 @@ db.once('open',function callback(){
 });
 
 
-var sensorDataSchema= new Schema({
+var parkingDataSchema= new Schema({
     
-    sensorType: { type: String, required: true },
-    sensorVal: { type: String }
+    lotID: { type: String, required: true },
+    status: { type: String }
 });
 
-sensorDataSchema.plugin(autoIncrement.plugin, 'sensorData');
-var SensorData = connection.model('SensorData',sensorDataSchema);
+parkingDataSchema.plugin(autoIncrement.plugin, 'parkingData');
+var ParkingData = connection.model('ParkingData',parkingDataSchema);
 
-module.exports.SensorData = SensorData;
+module.exports.ParkingData = ParkingData;
