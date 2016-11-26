@@ -372,7 +372,7 @@ $ python server.py
 
 
 
-### Подключение Lora к Raspberry 
+### Подключение LoRa к Raspberry 
 
 На следующей картинке представлены выводы платы Lora Bee. 
 ![](assets/dragino.jpg) 
@@ -390,4 +390,31 @@ $ python server.py
 Если у вас плата с уже припаянными проводами, то руководствуйтесь следующей схемой:
 ![](assets/lora_rasp.png) 
 
+### Взаимодействие с LoRa на Raspberry
 
+
+ВНИМАНИЕ! НЕОБХОДИМО УСТАНОВИТЬ SQLITE3
+
+sudo apt-get install libsqlite3-dev
+sudo apt-get install sqlite3
+
+
+Код программы для Pi находится по адресу
+
+https://github.com/bmstu-hackathon/2016/tree/master/src/Raspberry/LeoNickTEAM
+
+Сделайте git clone репозитория
+git clone https://github.com/bmstu-hackathon/2016.git
+
+Перейдите в указанную директорию
+2016/src/Raspberry/LeoNickTEAM/
+
+Последовательно вводим команды
+* sudo rm hackathon.o
+* sudo rm hackathon
+* sudo make hackathon
+
+* sudo ./hackathon # - Команда выполняется только после того как на Arduino будет запущен скеч лежащий в папке репозитория 
+по адресу 2016/src/Arduino/hackathon_LeoNickTeam/
+
+В файле hackathon.cpp находится код основной программы. Если будете его редактировать, повторите все 3 вышеописанные команды.
