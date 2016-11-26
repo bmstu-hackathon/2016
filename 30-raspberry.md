@@ -395,8 +395,9 @@ $ python server.py
 
 ВНИМАНИЕ! НЕОБХОДИМО УСТАНОВИТЬ SQLITE3
 
-sudo apt-get install libsqlite3-dev
-sudo apt-get install sqlite3
+`sudo apt-get install libsqlite3-dev`
+
+`sudo apt-get install sqlite3`
 
 
 Код программы для Pi находится по адресу
@@ -404,15 +405,15 @@ sudo apt-get install sqlite3
 https://github.com/bmstu-hackathon/2016/tree/master/src/Raspberry/LeoNickTEAM
 
 Сделайте git clone репозитория
-git clone https://github.com/bmstu-hackathon/2016.git
+`git clone https://github.com/bmstu-hackathon/2016.git`
 
 Перейдите в указанную директорию
 2016/src/Raspberry/LeoNickTEAM/
 
 Последовательно вводим команды
-* sudo rm hackathon.o
-* sudo rm hackathon
-* sudo make hackathon
+* `sudo rm hackathon.o`
+* `sudo rm hackathon`
+* `sudo make hackathon`
 
 * sudo ./hackathon # - Команда выполняется только после того как на Arduino будет запущен скеч лежащий в папке репозитория 
 по адресу 2016/src/Arduino/hackathon_LeoNickTeam/
