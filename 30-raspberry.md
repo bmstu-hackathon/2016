@@ -423,6 +423,22 @@ int ide=sx1272.packet_received.src;
 
 int ide=6;//sx1272.packet_received.src;
 
+!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!ВНИМАНИЕ!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!
+
+в hackathon.cpp
+
+СТРОКУ
+
+e = sx1272.sendPacketTimeout(iden,(uint8_t*)status , strlen(status), 1000);
+
+ЗАМЕНИТЬ НА
+
+e = sx1272.sendPacketTimeout(DEFAULT_DEST_ADDR,(uint8_t*)status , strlen(status), 1000);
+
+
+
 
 Последовательно вводим команды
 * `sudo rm hackathon.o`
