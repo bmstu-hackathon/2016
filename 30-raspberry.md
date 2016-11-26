@@ -336,7 +336,7 @@ WTForms==2.1
 Для начала создадим и запустим виртуальное окружение:
 
 ```shell
-$ sudo pip install venv
+$ sudo pip install virtualenv
 $ virtualenv venv
 $ source venv/bin/activate
 
