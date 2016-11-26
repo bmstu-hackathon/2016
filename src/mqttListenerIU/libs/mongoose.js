@@ -1,8 +1,9 @@
 var mongoose    = require('mongoose'),
-	Schema = mongoose.Schema,
+	Schema = mongoose.Schema,		
+	conf = require('../config.json'),
 	autoIncrement = require('mongoose-auto-increment');
 
-var connection = mongoose.createConnection("mongodb://admin:XOLEFJURAVGNLPJF@sl-us-dal-9-portal.4.dblayer.com:16416/admin?ssl=true");
+var connection = mongoose.createConnection(conf.mongodb_uri);
  
 autoIncrement.initialize(connection);
  

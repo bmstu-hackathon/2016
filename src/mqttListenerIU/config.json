@@ -5,6 +5,7 @@
     "eventID" : "mySensor",
     "appID" : "myApp",
     "username" : "a-i7kwd0-qshqccudkb",
-    "password" : "v1rp6guQu_3s8lddQO"
+    "password" : "v1rp6guQu_3s8lddQO",
+    "mongodb_uri": "mongodb://admin:JOTFYGGEMEQWJCAB@sl-us-dal-9-portal.1.dblayer.com:16976/admin?ssl=true"
 }
 
