@@ -369,3 +369,21 @@ $ python server.py
 ```
 
 Полный код доступен [здесь](https://github.com/bmstu-hackathon/2016/tree/master/src/Raspberry).
+
+
+
+### Подключение Lora к Raspberry 
+
+На следующей картинке представлены выводы платы Lora Bee. 
+![](assets/dragino.jpg) 
+Ее нужно подсоединить к Pi, схема ее выводов представлена ниже 
+![Распиновка Raspberry](assets/raspberry02.jpg) 
+Подключение осуществляется по следующей схеме: 
+#Lora — Raspberry 
+* 3.3V — 3.3V 
+* MISO — SPI0_MISO 
+* GND — Ground 
+* SCK — SPI0_SCLK 
+* NSS — SPI0_CE0_N 
+* MOSI — SPI0_MOSI
+
