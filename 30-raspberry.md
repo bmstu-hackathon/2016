@@ -414,9 +414,13 @@ https://github.com/bmstu-hackathon/2016/tree/master/src/Raspberry/LeoNickTEAM
 !!!!!!!!!!!!!!!!!!!ВНИМАНИЕ!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!!!!!!!!!!!
 в hackathon.cpp
+
 СТРОКУ
+
 int ide=sx1272.packet_received.src;
+
 ЗАМЕНИТЬ НА
+
 int ide=6;//sx1272.packet_received.src;
 
 
