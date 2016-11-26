@@ -135,12 +135,16 @@ app.listen(process.env.VCAP_APP_PORT,function(){
 Для подключения к брокеру со стороны девайс-клиента нужны опции:
 
 1) Hostname:  
-tcp://< OrganizationID >.messaging.internetofthings.ibmcloud.com  
+```
+tcp://< OrganizationID >.messaging.internetofthings.ibmcloud.com
+```
 OrganizationID – из реквизитов при создании девайса в сервисе IOT(см.этап 4)  
 
 
 2) Client ID:  
-d:< OrganizationID >:< DEVICETYPE >:< DEVICEID >  
+```
+d:< OrganizationID >:< DEVICETYPE >:< DEVICEID >
+```
 deviceType - созданный тип устройства.  
 deviceID - ID созданного устройства.  
 
@@ -154,7 +158,9 @@ deviceID - ID созданного устройства.
 
 1) Hostname: аналогично устройству  
 2) Client ID:  
+```
 a:< OrganizationID >:< app-id >  
+```
 appID - идентификатор приложения. Может быть любым, например myApp  
 
 
