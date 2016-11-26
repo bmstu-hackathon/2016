@@ -1,0 +1,11 @@
+{
+    "BLUEMIXAPPID" : "vln6hd",
+    "deviceType" : "MQTTDevice",
+    "deviceID" : "aabbccddee12",
+    "eventID" : "mySensor",
+    "appID" : "myApp",
+    "username" : "a-vln6hd-lua43os9vm",
+    "password" : "Ju)n@W!Vf-t88E(E3O",
+    "mongodb_uri": "mongodb://admin:XOLEFJURAVGNLPJF@sl-us-dal-9-portal.4.dblayer.com:16416/admin?ssl=true"
+}
+
