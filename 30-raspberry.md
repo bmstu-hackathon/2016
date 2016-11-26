@@ -387,3 +387,7 @@ $ python server.py
 * NSS — SPI0_CE0_N 
 * MOSI — SPI0_MOSI
 
+Если у вас плата с уже припаянными проводами, то руководствуйтесь следующей схемой:
+![](assets/lora_rasp.png) 
+
+
