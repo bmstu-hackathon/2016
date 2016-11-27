@@ -1,7 +1,8 @@
 # Работа с IBM Bluemix <a name="401"></a>
 ## Регистрация в Bluemix <a name="402"></a>
 
-Для начала переходим по ссылке https://console.ng.bluemix.net/
+Для начала переходим по ссылке https://console.ng.bluemix.net/.
+
 В правом верхнем углу выбираем Sign UP.
 
 ![](assets/Bluemix1.JPG)
