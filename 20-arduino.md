@@ -156,7 +156,6 @@ http://lo-ra.ru/lora/
 
 Dragino Lora/GPS Shield - это плата расширения для модуля LoRa™/GPS , устанавливаемая на Arduino Uno или на её аналог Seeduino. Этот шилд предназначан для тех, кто заинтересован в развитии и использовании LoRa™/GPS технологий.  Конструктивно Lora/GPS Shield состоит из собственно платы расширения и установленными на ней GPS-модуле и Lora BEE:
 
-<img src="assets/lora_bee_shield.jpg" height="190">
 ![alt tag](assets/lora_bee_shield.jpg)
 
 ## Lora BEE <a name="223"></a>
