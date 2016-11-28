@@ -167,7 +167,10 @@ Lora BEE основан на приемопередатчике [SX1276/SX1278].
 Этот модуль может устанавливаться на посадочное место на плате расширения Lora/GPS Shield.
 Ниже представлено изображение данного модуля:
 
-<img src="assets/lora_bee.jpg" height="190"><img src="assets/lora_bee_2.jpg" height="190">
+
+<img src="assets/lora_bee.jpg" height="190">
+
+<img src="assets/lora_bee_2.jpg" height="190">
 
 
 
