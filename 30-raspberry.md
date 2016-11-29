@@ -4,6 +4,7 @@
 >
 
 ![Raspberry PI](assets/raspberry01.jpg)
+
 **Raspberry PI**
 
 ## Описание <a name="291"></a>
