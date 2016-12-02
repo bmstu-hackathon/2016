@@ -22,7 +22,6 @@ https://github.com/oljekechoro/hackathonTizenClient.git
 ```php
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -34,7 +33,6 @@ https://github.com/oljekechoro/hackathonTizenClient.git
     <script src="js/jquery3.11.js"></script>
     <script src="js/main.js"></script>
 </head>
-
 <body>
     <div id="main" class="page">
         <div class="contents">
@@ -42,27 +40,23 @@ https://github.com/oljekechoro/hackathonTizenClient.git
            <div id="ipField">
            		<p>Введите IP-адрес Raspberry Pi</p>
            		<p>в формате "ххх.ххх.ххх.ххх"</p>
-           		<input type="text" name="name" id="ip" onchange="setIp()"/>
+           		<input type="text" name="name" id="ip" />
+           		<button onclick="setIp()">Перейти</button>
            	</div>
             <div id="field"></div>
         </div>
     </div>
 </body>
-
 </html>
 ```
 
 В элемент *div* c *id = “field”* (25-строка) будет вставляться весь контент, полученный с Raspberry.
-Логика веб-приложений Tizen программируется на JavaScript, файл с кодом находится по следующему пути:  *js/main.js*. Немного пройдемся по коду.
+Логика веб-приложений Tizen программируется на JavaScript, файл с кодом находится по следующему пути:  *js/main.js*.
 
 ```javascript
-var SERVER_URL;
-var DELAY = 2000;
+var SERVER_URL; //Адрес сервера (Raspberry)
 
 window.onload = function() {
-    // TODO:: Do your initialization job
-
-    // add eventListener for tizenhwkey
     document.addEventListener('tizenhwkey', function(e) {
         if (e.keyName === "back") {
             try {
@@ -70,39 +64,16 @@ window.onload = function() {
             } catch (ignore) {}
         }
     });
-    setInterval(getFromPi, DELAY);
 };
 
-function onError(){
-	console.log("Что-то с сервером :(");
-}
-
 function setIp(){
-	var a = $("#ip").val();
-	SERVER_URL = a;
-	getFromPi();
+	//записываем адрес Raspberry, извлекая его из тега <input> с id="ip"
+	SERVER_URL = $("#ip").val(); 
+	//и перенаправляемся на страничку сервера
+	window.location.replace("http://" + SERVER_URL + ":5000/");
 }
 
-function show(data){
-	window.location.replace("http://"+SERVER_URL+":5000/");
-}
-function getFromPi(){
-	$.ajax({
-		url: "http://"+SERVER_URL+":5000/",
-		type: "GET",
-		dataType: "text",
-		success: show,
-		error: onError 
-	})
-}
 ```
-* *DELAY* – период обновления контента, получаемого от Raspberry
-* *SERVER_URL* – адрес сервера, он инициализируется полем *input* с *id = "ip”*. Его можно захардкодить, тогда можно смело избавляться от элемента *input* и функции *setIp()*.
-* Функция *getFromPi()* выполняет AJAX-запрос к Raspberry по адресу
-http:// + SERVER_URL + ":5000" для проверки связи
-Если у вас другой порт и страница скрипта, поменяйте адрес.
-* *setInterval* на 15-строке устанавливает таймер, который по истечению *DELAY* будет вызывать функцию *getFromPi()*.
-* Функция *show()* перенаправляет на страницу "http://" + SERVER_URL + ":5000" 
 
 ## Отладка приложения <a name="354"></a>
 
