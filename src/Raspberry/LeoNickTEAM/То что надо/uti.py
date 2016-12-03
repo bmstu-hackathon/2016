@@ -25,7 +25,7 @@ def update_status(identifier, stat):
 def get_status(identifier):
     identifier += 1
     if 1 << identifier << 16:
-        query = Place.select().where(Place.identifier == identifier)
+        query = Place.select().where(Place.identifier == identifier).get()
         return query.status
     else:
         return None
